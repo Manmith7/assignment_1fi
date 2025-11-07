@@ -2,12 +2,11 @@ import Product from "../models/Product.js";
 import Emi from "../models/Emi.js";
 import mongoose from "mongoose";
 
-// Helper to calculate lowest perMonth EMI for a given product price
 const calculatePerMonth = async (productPrice) => {
   const emis = await Emi.aggregate([
     {
       $addFields: {
-        perMonth: { $divide: [productPrice, "$tenure"] } // simple EMI calc
+        perMonth: { $divide: [productPrice, "$tenure"] }
       }
     },
     {
@@ -18,15 +17,12 @@ const calculatePerMonth = async (productPrice) => {
     }
   ]);
 
-  // emis = [{ _id: null, minimum: <value> }]
   return emis.length > 0 ? emis[0].minimum : null;
 };
 
-// Create Product
 export const createProduct = async (req, res) => {
   try {
     const newProduct = await Product.create(req.body);
-    console.log("✅ Product created successfully");
 
     return res.status(200).json({
       success: true,
@@ -34,7 +30,7 @@ export const createProduct = async (req, res) => {
       product: newProduct,
     });
   } catch (error) {
-    console.error("❌ Error creating product:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error creating product",
@@ -43,7 +39,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
-// Get Product + EMI Plans
+
 export const getProductDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -74,7 +70,7 @@ export const getProductDetails = async (req, res) => {
       emiPlans: emis,
     });
   } catch (error) {
-    console.error("❌ Error while getting product details:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error fetching product or EMIs",
@@ -83,7 +79,7 @@ export const getProductDetails = async (req, res) => {
   }
 };
 
-// Get All Products + EMI starts from (lowest)
+
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -99,15 +95,13 @@ export const getAllProducts = async (req, res) => {
       })
     );
 
-    console.log("✅ Fetched all products with EMI info");
-
     return res.status(200).json({
       success: true,
       message: "Fetched all products successfully",
       products: productsWithEmi,
     });
   } catch (error) {
-    console.error("❌ Error fetching all products:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error fetching products",

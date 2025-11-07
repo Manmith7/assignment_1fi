@@ -40,12 +40,11 @@ const Products = () => {
 
     return (
         <div className="m-6">
-            {/* Title */}
+
             <h1 className="text-center text-5xl md:text-6xl font-bold mb-12 text-gray-800">
                 Our Products
             </h1>
 
-            {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {
                     products?.map((product) => {

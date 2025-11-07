@@ -1,13 +1,11 @@
 import Joi from "joi";
 
-// EMI Validation
 export const createEmiValidation = Joi.object({
   tenure: Joi.number().min(1).max(36).required(),
   rate: Joi.number().min(0).required(),
   cashback: Joi.number().optional()
 });
 
-// Product Validation
 export const createProductValidation = Joi.object({
   p_name: Joi.string().required(),
   p_desc: Joi.string().required(),
