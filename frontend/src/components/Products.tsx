@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import ProductCard from '../ui/ProductCard'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import { BackendUrl } from '../constants';
 interface Product {
     _id: string;
     p_name: string;
@@ -29,7 +30,7 @@ const Products = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
     const fetchProducts = async () => {
-        const res = await axios.get('http://localhost:8000/api/products/');
+        const res = await axios.get(`${BackendUrl}`);
         console.log("Products", res.data)
         setProducts(res.data.products);
     }

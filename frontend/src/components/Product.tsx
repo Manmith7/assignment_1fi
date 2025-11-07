@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { BackendUrl } from '../constants';
 
 interface EMIPlan {
   _id: number;
@@ -50,7 +51,7 @@ const Product = () => {
 
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/products/${id}`);
+      const res = await axios.get(`${BackendUrl}/${id}`);
       const fetchedProduct: ProductType = res.data.product;
       const fetchedEmiPlans: EMIPlan[] = res.data.emiPlans || [];
 
