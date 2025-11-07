@@ -20,11 +20,9 @@ const calculatePerMonth = async (productPrice) => {
   return emis.length > 0 ? emis[0].minimum : null;
 };
 
-// Create Product
 export const createProduct = async (req, res) => {
   try {
     const newProduct = await Product.create(req.body);
-    console.log("Product created successfully");
 
     return res.status(200).json({
       success: true,
@@ -32,7 +30,7 @@ export const createProduct = async (req, res) => {
       product: newProduct,
     });
   } catch (error) {
-    console.error("Error creating product:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error creating product",
@@ -40,6 +38,7 @@ export const createProduct = async (req, res) => {
     });
   }
 };
+
 
 export const getProductDetails = async (req, res) => {
   try {
@@ -71,7 +70,6 @@ export const getProductDetails = async (req, res) => {
       emiPlans: emis,
     });
   } catch (error) {
-    console.error("Error while getting product details:", error.message);
     return res.status(500).json({
       success: false,
       message: "Error fetching product or EMIs",
@@ -95,15 +93,13 @@ export const getAllProducts = async (req, res) => {
       })
     );
 
-    console.log("Fetched all products with EMI info");
-
     return res.status(200).json({
       success: true,
       message: "Fetched all products successfully",
       products: productsWithEmi,
     });
   } catch (error) {
-    console.error("Error fetching all products:", error.message);
+
     return res.status(500).json({
       success: false,
       message: "Error fetching products",

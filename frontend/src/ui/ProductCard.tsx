@@ -14,10 +14,9 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const mainImage = product.p_images?.[0]?.images?.[0] || '/placeholder.png';
 
-  // ✅ Use Intl.NumberFormat for clean currency formatting
   const formatPrice = (price: string | number) => {
     const numPrice = typeof price === 'string' ? parseFloat(price) : price;
-    if (isNaN(numPrice)) return price; // fallback if invalid
+    if (isNaN(numPrice)) return price;
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -27,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="max-w-sm bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 cursor-pointer">
-      {/* Product Image */}
+
       <div className="relative">
         <img
           src={mainImage}
@@ -39,12 +38,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </span>
       </div>
 
-      {/* Product Info */}
       <div className="p-5 flex flex-col gap-2">
         <h3 className="text-lg font-semibold text-gray-800">{product.p_name}</h3>
         <p className="text-sm text-gray-500 line-clamp-2">{product.p_desc}</p>
 
-        {/* ✅ EMI starts from */}
         {product.emiStartsFrom && (
           <p className="text-sm text-gray-600">
             EMI starts from:{' '}
@@ -54,12 +51,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </p>
         )}
 
-        {/* ✅ Formatted Price */}
         <h3 className="text-xl font-bold text-gray-900 mt-2">
           {formatPrice(product.p_price)}
         </h3>
 
-        {/* Action buttons */}
         <div className="mt-4 flex gap-3">
           <button className="flex-1 bg-blue-600 text-white text-sm font-medium py-2 rounded hover:bg-blue-700 transition-colors">
             Add to Cart

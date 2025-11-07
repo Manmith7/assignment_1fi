@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import  { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router';
 import { BackendUrl } from '../constants';
 
@@ -38,7 +40,6 @@ const Product = () => {
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [selectedVariant, setSelectedVariant] = useState<ProductType['p_varients'][0] | null>(null);
 
-  // ✅ Currency formatter (Indian Rupee)
   const formatPrice = (price: string | number) => {
     const numPrice = typeof price === 'string' ? parseFloat(price) : price;
     if (isNaN(numPrice)) return price;
@@ -58,7 +59,6 @@ const Product = () => {
       setProduct(fetchedProduct);
       setEmiPlans(fetchedEmiPlans);
 
-      // Initialize states after fetching
       setSelectedColor(fetchedProduct.p_images[0]);
       setSelectedImage(fetchedProduct.p_images[0].images[0]);
       setSelectedVariant(fetchedProduct.p_varients[0]);
@@ -75,7 +75,7 @@ const Product = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 flex flex-col lg:flex-row gap-12 mt-10">
-      {/* Left - Images */}
+
       <div className="flex-1">
         <img
           src={selectedImage}
@@ -117,18 +117,15 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Right - Product Info */}
       <div className="flex-1 flex flex-col gap-6">
         <h1 className="text-3xl font-bold text-gray-800">{product.p_name}</h1>
         <p className="text-gray-600">{product.p_desc}</p>
 
         <div className="flex gap-6 items-center mt-2">
-          {/* ✅ Price formatted */}
           <span className="text-2xl font-semibold text-gray-900">{formatPrice(product.p_price)}</span>
           <span className="text-gray-500">Screen: {product.screenSize}</span>
         </div>
 
-        {/* Variant selection */}
         <div>
           <h3 className="font-medium mb-2">Variants</h3>
           <div className="flex gap-4">
@@ -148,7 +145,6 @@ const Product = () => {
           </div>
         </div>
 
-        {/* ✅ EMI Plans formatted */}
         {emiPlans.length > 0 && (
           <div>
             <h3 className="font-medium mb-2">EMI Options</h3>
@@ -175,7 +171,6 @@ const Product = () => {
           </div>
         )}
 
-        {/* Seller & Actions */}
         <div className="flex flex-col gap-3 mt-6">
           <p className="text-gray-600">
             Sold By: <span className="font-medium">{product.soldBy}</span>
