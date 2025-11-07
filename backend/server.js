@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
 import { connectDB } from './config/db.js'
-import ProductRoutes from './routes/Product.routes.js'
+import ProductRoutes from './routes/product.routes.js'
 import EmiRoutes from './routes/emi.routes.js'
 import cors from 'cors';
 const app = express()
