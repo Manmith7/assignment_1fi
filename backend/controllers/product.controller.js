@@ -6,7 +6,7 @@ const calculatePerMonth = async (productPrice) => {
   const emis = await Emi.aggregate([
     {
       $addFields: {
-        perMonth: { $divide: [productPrice, "$tenure"] }
+        perMonth: { $divide: [productPrice, "$tenure"] } 
       }
     },
     {
@@ -70,7 +70,6 @@ export const getProductDetails = async (req, res) => {
       emiPlans: emis,
     });
   } catch (error) {
-
     return res.status(500).json({
       success: false,
       message: "Error fetching product or EMIs",
@@ -78,7 +77,6 @@ export const getProductDetails = async (req, res) => {
     });
   }
 };
-
 
 export const getAllProducts = async (req, res) => {
   try {
